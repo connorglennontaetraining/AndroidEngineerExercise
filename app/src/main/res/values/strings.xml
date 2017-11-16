@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Android Engineer Exercise</string>
+
+    <string name="lblInputEmail">Email address</string>
+    <string name="lblInputPassword1">Create password</string>
+    <string name="lblInputPassword2">Repeat password</string>
+    <string name="passwordRules">
+        Your password should have a minimum of 8 characters and contain at least one number,
+        one uppercase letter and one lowercase letter. You can use special characters.
+    </string>
+    <string name="hintEmail">Enter your email</string>
+    <string name="hintPassword1">Enter your password</string>
+    <string name="hintPassword2">Re-enter your password</string>
+
+    <string name="titlePlaceholder">Activity Title</string>
 </resources>

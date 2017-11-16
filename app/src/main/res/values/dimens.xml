@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="leftEdge">0.1</dimen>
+    <dimen name="rightEdge">0.9</dimen>
+    <dimen name="btnHeight">40dp</dimen>
+
+</resources>

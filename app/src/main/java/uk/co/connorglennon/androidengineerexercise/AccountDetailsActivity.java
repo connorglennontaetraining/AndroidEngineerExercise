@@ -3,11 +3,11 @@ package uk.co.connorglennon.androidengineerexercise;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class WelcomeActivity extends AppCompatActivity {
+public class AccountDetailsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
+        setContentView(R.layout.activity_account_details);
     }
 }

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="uk.co.connorglennon.androidengineerexercise.SignUpActivity">
+
+    <fragment
+        android:id="@+id/fragmentTitleBar"
+        android:name="uk.co.connorglennon.androidengineerexercise.TitleBarFragment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideLeftEdge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="@dimen/leftEdge" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideRightEdge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="@dimen/rightEdge" />
+
+    <TextView
+        android:id="@+id/lblInputEmail"
+        style="@style/inputLabelStyle"
+        android:layout_width="0dp"
+        android:layout_marginTop="32dp"
+        android:layout_height="wrap_content"
+        android:text="@string/lblInputEmail"
+        app:layout_constraintEnd_toStartOf="@+id/guideRightEdge"
+        app:layout_constraintStart_toStartOf="@+id/guideLeftEdge"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentTitleBar" />
+
+    <EditText
+        android:id="@+id/inputEmail"
+        style="@style/inputEditTextStyle"
+        android:layout_width="0dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/hintEmail"
+        app:layout_constraintEnd_toStartOf="@+id/guideRightEdge"
+        app:layout_constraintStart_toStartOf="@+id/guideLeftEdge"
+        app:layout_constraintTop_toBottomOf="@+id/lblInputEmail" />
+
+    <TextView
+        android:id="@+id/lblInputPassword1"
+        style="@style/inputLabelStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/lblInputPassword1"
+        app:layout_constraintEnd_toStartOf="@+id/guideRightEdge"
+        app:layout_constraintStart_toStartOf="@+id/guideLeftEdge"
+        app:layout_constraintTop_toBottomOf="@+id/inputEmail" />
+
+    <EditText
+        android:id="@+id/inputPassword1"
+        style="@style/inputEditTextStyle"
+        android:layout_width="0dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/hintPassword1"
+        app:layout_constraintEnd_toStartOf="@+id/guideRightEdge"
+        app:layout_constraintStart_toStartOf="@+id/guideLeftEdge"
+        app:layout_constraintTop_toBottomOf="@+id/lblInputPassword1" />
+
+    <TextView
+        android:id="@+id/lblInputPassword2"
+        style="@style/inputLabelStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/lblInputPassword2"
+        app:layout_constraintEnd_toStartOf="@+id/guideRightEdge"
+        app:layout_constraintStart_toStartOf="@+id/guideLeftEdge"
+        app:layout_constraintTop_toBottomOf="@+id/inputPassword1" />
+
+    <EditText
+        android:id="@+id/inputPassword2"
+        style="@style/inputEditTextStyle"
+        android:layout_width="0dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/hintPassword2"
+        app:layout_constraintEnd_toStartOf="@+id/guideRightEdge"
+        app:layout_constraintStart_toStartOf="@+id/guideLeftEdge"
+        app:layout_constraintTop_toBottomOf="@+id/lblInputPassword2" />
+
+    <TextView
+        android:id="@+id/passwordRules"
+        style="@style/paragraphStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/passwordRules"
+        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintEnd_toStartOf="@+id/guideRightEdge"
+        app:layout_constraintStart_toStartOf="@+id/guideLeftEdge"
+        app:layout_constraintTop_toBottomOf="@+id/inputPassword2" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/btnHeight"
+        android:background="@drawable/gradient_button_background"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideRightEdge"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideLeftEdge" />
+
+
+</android.support.constraint.ConstraintLayout>
