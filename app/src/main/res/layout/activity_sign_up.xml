@@ -29,10 +29,9 @@
         app:layout_constraintGuide_percent="@dimen/rightEdge" />
 
     <TextView
+        style="@style/textViewStyleAEE"
         android:id="@+id/lblInputEmail"
-        style="@style/inputLabelStyle"
         android:layout_width="0dp"
-        android:layout_marginTop="32dp"
         android:layout_height="wrap_content"
         android:text="@string/lblInputEmail"
         app:layout_constraintEnd_toStartOf="@+id/guideRightEdge"
@@ -40,8 +39,8 @@
         app:layout_constraintTop_toBottomOf="@+id/fragmentTitleBar" />
 
     <EditText
+        style="@style/editTextStyleAEE"
         android:id="@+id/inputEmail"
-        style="@style/inputEditTextStyle"
         android:layout_width="0dp"
         android:ems="10"
         android:inputType="textPersonName"
@@ -51,8 +50,8 @@
         app:layout_constraintTop_toBottomOf="@+id/lblInputEmail" />
 
     <TextView
+        style="@style/textViewStyleAEE"
         android:id="@+id/lblInputPassword1"
-        style="@style/inputLabelStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/lblInputPassword1"
@@ -61,8 +60,8 @@
         app:layout_constraintTop_toBottomOf="@+id/inputEmail" />
 
     <EditText
+        style="@style/editTextStyleAEE"
         android:id="@+id/inputPassword1"
-        style="@style/inputEditTextStyle"
         android:layout_width="0dp"
         android:ems="10"
         android:inputType="textPersonName"
@@ -72,8 +71,8 @@
         app:layout_constraintTop_toBottomOf="@+id/lblInputPassword1" />
 
     <TextView
+        style="@style/textViewStyleAEE"
         android:id="@+id/lblInputPassword2"
-        style="@style/inputLabelStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/lblInputPassword2"
@@ -82,8 +81,8 @@
         app:layout_constraintTop_toBottomOf="@+id/inputPassword1" />
 
     <EditText
+        style="@style/editTextStyleAEE"
         android:id="@+id/inputPassword2"
-        style="@style/inputEditTextStyle"
         android:layout_width="0dp"
         android:ems="10"
         android:inputType="textPersonName"
@@ -98,16 +97,15 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/passwordRules"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/btnCreateAccount"
         app:layout_constraintEnd_toStartOf="@+id/guideRightEdge"
         app:layout_constraintStart_toStartOf="@+id/guideLeftEdge"
         app:layout_constraintTop_toBottomOf="@+id/inputPassword2" />
 
     <Button
-        android:id="@+id/button2"
+        style="@style/buttonAEE"
+        android:id="@+id/btnCreateAccount"
         android:layout_width="0dp"
-        android:layout_height="@dimen/btnHeight"
-        android:background="@drawable/gradient_button_background"
         android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideRightEdge"
