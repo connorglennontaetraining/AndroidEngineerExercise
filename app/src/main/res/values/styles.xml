@@ -22,13 +22,13 @@
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:paddingLeft">10dp</item>
         <item name="android:layout_height">40dp</item>
-        <item name="android:layout_marginTop">32dp</item>
+        <item name="android:layout_marginTop">16dp</item>
     </style>
 
     <style name="buttonAEE" parent="android:Widget.Button">
         <item name="android:background">@drawable/gradient_button_background</item>
         <item name="android:layout_height">@dimen/btnHeight</item>
-        <item name="android:layout_marginTop">32dp</item>
+        <item name="android:layout_marginTop">16dp</item>
     </style>
 
     <style name="titleBarStyle" parent="textViewStyleAEE">

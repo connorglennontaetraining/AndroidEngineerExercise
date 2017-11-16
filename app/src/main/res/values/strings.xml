@@ -4,6 +4,7 @@
     <string name="lblInputEmail">Email address</string>
     <string name="lblInputPassword1">Create password</string>
     <string name="lblInputPassword2">Repeat password</string>
+    <string name="lblChangeProfilePicture">Change profile picture</string>
     <string name="passwordRules">
         Your password should have a minimum of 8 characters and contain at least one number,
         one uppercase letter and one lowercase letter. You can use special characters.
@@ -11,6 +12,13 @@
     <string name="hintEmail">Enter your email</string>
     <string name="hintPassword1">Enter your password</string>
     <string name="hintPassword2">Re-enter your password</string>
+    <string name="hintName">Enter your full name</string>
+    <string name="hintUsername">Enter a unique username</string>
+    <string name="hintAge">Enter your age</string>
+    <string name="hintDOB">Enter your D.O.B.</string>
 
     <string name="titlePlaceholder">Activity Title</string>
+
+    <string name="descProfilePicture">Your current profile picture.</string>
+    <string name="descDatePicker">Calender Icon.</string>
 </resources>
