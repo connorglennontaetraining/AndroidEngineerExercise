@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import uk.co.connorglennon.androidengineerexercise.R;
+
 /**
  * Created by Conno_000 on 2017-11-16.
  */

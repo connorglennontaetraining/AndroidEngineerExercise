@@ -6,28 +6,101 @@
     android:layout_height="match_parent"
     tools:context="uk.co.connorglennon.androidengineerexercise.WelcomeActivity">
 
+    <android.support.constraint.Guideline
+        android:id="@+id/guideLeftEdge"
+        style="@style/guideVertical"
+        app:layout_constraintGuide_percent="0.1"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideRightEdge"
+        style="@style/guideVertical"
+        app:layout_constraintGuide_percent="0.9"/>
+
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="348dp"
-        android:layout_height="84dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/imgLogo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        app:layout_constraintLeft_toLeftOf="@id/guideLeftEdge"
+        app:layout_constraintRight_toRightOf="@id/guideRightEdge"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo_green_flag" />
 
+    <ScrollView
+        style="@style/scrollView"
+        android:layout_marginTop="64dp"
+        app:layout_constraintTop_toBottomOf="@id/imgLogo"
+        app:layout_constraintBottom_toTopOf="@id/btnNext"
+        app:layout_constraintLeft_toLeftOf="@id/guideLeftEdge"
+        app:layout_constraintRight_toRightOf="@id/guideRightEdge">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+
+            <TextView
+                style="@style/tvForm"
+                android:id="@+id/tvWelcomeText"
+                android:textSize="20sp"
+                android:text="@string/tvWelcomeText"/>
+
+            <ImageView
+                style="@style/imgTick"
+                android:id="@+id/imgTick1"
+                app:srcCompat="@drawable/tick"
+                app:layout_constraintTop_toBottomOf="@id/tvWelcomeText"
+                />
+
+            <TextView
+                style="@style/tvWelcomeScreenListItem"
+                android:id="@+id/tvWelcomeListItem1"
+                android:text="@string/tvWelcomeListItem1"
+                app:layout_constraintLeft_toRightOf="@id/imgTick1"
+                app:layout_constraintTop_toTopOf="@id/imgTick1"
+                app:layout_constraintBottom_toBottomOf="@id/imgTick1"/>
+
+            <ImageView
+                style="@style/imgTick"
+                android:id="@+id/imgTick2"
+                app:srcCompat="@drawable/tick"
+                app:layout_constraintTop_toBottomOf="@id/imgTick1"/>
+
+            <TextView
+                style="@style/tvWelcomeScreenListItem"
+                android:id="@+id/tvWelcomeListItem2"
+                android:text="@string/tvWelcomeListItem2"
+                app:layout_constraintLeft_toRightOf="@id/imgTick2"
+                app:layout_constraintTop_toTopOf="@id/imgTick2"
+                app:layout_constraintBottom_toBottomOf="@id/imgTick2"/>
+
+            <ImageView
+                style="@style/imgTick"
+                android:id="@+id/imgTick3"
+                app:srcCompat="@drawable/tick"
+                app:layout_constraintTop_toBottomOf="@id/imgTick2"/>
+
+            <TextView
+                style="@style/tvWelcomeScreenListItem"
+                android:id="@+id/tvWelcomeListItem3"
+                android:text="@string/tvWelcomeListItem3"
+                app:layout_constraintLeft_toRightOf="@id/imgTick3"
+                app:layout_constraintTop_toTopOf="@id/imgTick3"
+                app:layout_constraintBottom_toBottomOf="@id/imgTick3"/>
+
+        </android.support.constraint.ConstraintLayout>
+
+
+    </ScrollView>
+
     <Button
         android:id="@+id/btnNext"
-        style="@style/buttonAEE"
-        android:layout_width="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:text="@string/btnNext"
-        android:onClick="handleOnClick"
+        style="@style/btnNext"
+        android:text="@string/btnNextCreateAccount"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintLeft_toLeftOf="@id/guideLeftEdge"
+        app:layout_constraintRight_toRightOf="@id/guideRightEdge"/>
 </android.support.constraint.ConstraintLayout>

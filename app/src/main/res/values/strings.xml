@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">Android Engineer Exercise</string>
 
+    <string name="tvWelcomeText">GreenFlag customers can create an account to access</string>
+    <string name="tvWelcomeListItem1">Car health updates</string>
+    <string name="tvWelcomeListItem2">Request a rescue online</string>
+    <string name="tvWelcomeListItem3">Policy information</string>
+
     <string name="lblInputEmail">Email address</string>
     <string name="lblInputPassword1">Create password</string>
     <string name="lblInputPassword2">Repeat password</string>
@@ -9,7 +14,8 @@
     <string name="hintPassword1">Enter your password</string>
     <string name="hintPassword2">Re-enter your password</string>
 
-    <string name="lblInputName">Name</string>
+    <string name="lblInputForename">Forename</string>
+    <string name="lblInputSurname">Surname</string>
     <string name="lblInputUsername">Username</string>
     <string name="lblInputAge">Age</string>
     <string name="lblInputDOB">Date of Birth</string>
@@ -17,10 +23,11 @@
     <string name="lblInputGender">Gender</string>
     <string name="lblInputAddress">Address</string>
 
-    <string name="hintName">Enter your full name</string>
+    <string name="hintForename">Enter your first/forename</string>
+    <string name="hintSurname">Enter your second/surname</string>
     <string name="hintUsername">Enter a unique username</string>
     <string name="hintAge">Enter your age</string>
-    <string name="hintDOB">Enter your D.O.B.</string>
+    <string name="hintDOB">DD/MM/YYYY</string>
     <string name="hintCountry">Select your country</string>
     <string name="hintGender">What gender are you</string>
     <string name="hintAddress">Enter your address</string>
@@ -35,6 +42,10 @@
 
     <string name="btnChangeProfilePicture">Change</string>
     <string name="btnNext">Next</string>
+    <string name="btnNextCreateAccount">Create account</string>
+    <string name="btnNextSignUp">Sign up</string>
+    <string name="btnNextSaveDetails">Save details</string>
+
 
     <string name="titlePlaceholder">Activity Title</string>
 

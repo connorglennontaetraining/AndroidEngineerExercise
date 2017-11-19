@@ -6,78 +6,79 @@
     android:layout_height="match_parent"
     tools:context="uk.co.connorglennon.androidengineerexercise.AccountDetailsActivity">
 
-    <fragment
-        android:id="@+id/fragment"
-        android:name="uk.co.connorglennon.androidengineerexercise.TitleBarFragment"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <android.support.constraint.Guideline
         android:id="@+id/guideLeftEdge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="@dimen/leftEdge" />
+        style="@style/guideVertical"
+        app:layout_constraintGuide_percent="0.1"/>
 
     <android.support.constraint.Guideline
         android:id="@+id/guideRightEdge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="@dimen/rightEdge" />
+        style="@style/guideVertical"
+        app:layout_constraintGuide_percent="0.9"/>
+
+    <fragment
+        style="@style/fragmentTitleBar"
+        android:id="@+id/fragmentTitleBar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:fillViewport="true"
+        style="@style/scrollView"
         app:layout_constraintBottom_toTopOf="@id/btnNext"
         app:layout_constraintLeft_toRightOf="@+id/guideLeftEdge"
         app:layout_constraintRight_toLeftOf="@+id/guideRightEdge"
-        app:layout_constraintTop_toBottomOf="@+id/fragment">
+        app:layout_constraintTop_toBottomOf="@+id/fragmentTitleBar">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/lblInputName"
-                style="@style/textViewStyleAEE"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:id="@+id/lblInputForename"
+                style="@style/tvForm"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:text="@string/lblInputName"/>
+                android:text="@string/lblInputForename"/>
 
             <EditText
-                android:id="@+id/inputName"
-                style="@style/editTextStyleAEE"
-                android:layout_width="0dp"
-                android:ems="10"
-                android:hint="@string/hintName"
+                android:id="@+id/inputForename"
+                style="@style/etForm"
+                android:hint="@string/hintForename"
                 android:inputType="textPersonName"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lblInputName" />
+                app:layout_constraintTop_toBottomOf="@+id/lblInputForename" />
+
+            <TextView
+                android:id="@+id/lblInputSurname"
+                style="@style/tvForm"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/inputForename"
+                android:text="@string/lblInputSurname"/>
+
+            <EditText
+                android:id="@+id/inputSurname"
+                style="@style/etForm"
+                android:hint="@string/hintSurname"
+                android:inputType="textPersonName"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblInputSurname" />
 
             <TextView
                 android:id="@+id/lblInputUsername"
-                style="@style/textViewStyleAEE"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                style="@style/tvForm"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/inputName"
+                app:layout_constraintTop_toBottomOf="@+id/inputSurname"
                 android:text="@string/lblInputUsername"/>
 
             <EditText
                 android:id="@+id/inputUserName"
-                style="@style/editTextStyleAEE"
-                android:layout_width="0dp"
-                android:ems="10"
+                style="@style/etForm"
                 android:hint="@string/hintUsername"
                 android:inputType="textPersonName"
                 app:layout_constraintRight_toRightOf="parent"
@@ -86,40 +87,51 @@
 
             <ImageView
                 android:id="@+id/imgProfilePicture"
-                android:layout_width="128dp"
-                android:layout_height="128dp"
+                android:layout_width="256dp"
+                android:layout_height="256dp"
                 android:contentDescription="@string/descProfilePicture"
                 app:layout_constraintTop_toBottomOf="@+id/inputUserName"
                 app:srcCompat="@mipmap/ic_launcher"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"/>
 
-            <Button
-                android:id="@+id/btnChangePhoto"
-                style="@style/buttonAEE"
+            <ImageButton
+                android:id="@+id/btnChangePhotoGallery"
                 android:layout_width="0dp"
-                android:text="@string/btnChangeProfilePicture"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/photo_library"
+                android:background="@color/colorPrimary"
+                android:onClick="handleOnClick"
                 app:layout_constraintTop_toBottomOf="@+id/imgProfilePicture"
                 app:layout_constraintLeft_toLeftOf="@+id/imgProfilePicture"
+                app:layout_constraintRight_toLeftOf="@+id/btnChangePhotoCamera" />
+
+            <ImageButton
+                android:id="@+id/btnChangePhotoCamera"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/camera"
+                android:background="@color/colorPrimary"
+                android:onClick="handleOnClick"
+                app:layout_constraintTop_toBottomOf="@+id/imgProfilePicture"
+                app:layout_constraintLeft_toRightOf="@+id/btnChangePhotoGallery"
                 app:layout_constraintRight_toRightOf="@+id/imgProfilePicture" />
 
             <TextView
                 android:id="@+id/lblInputDOB"
-                style="@style/textViewStyleAEE"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                style="@style/tvForm"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnChangePhoto"
+                app:layout_constraintTop_toBottomOf="@+id/btnChangePhotoCamera"
                 android:text="@string/lblInputDOB"/>
 
             <EditText
                 android:id="@+id/inputDOB"
-                style="@style/editTextStyleAEE"
-                android:layout_width="0dp"
-                android:ems="10"
+                style="@style/etForm"
                 android:hint="@string/hintDOB"
                 android:inputType="date"
+                android:maxLength="10"
+                android:enabled="false"
                 app:layout_constraintRight_toLeftOf="@+id/btnDatePicker"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lblInputDOB" />
@@ -129,17 +141,17 @@
                 android:layout_width="@dimen/btnHeight"
                 android:layout_height="@dimen/btnHeight"
                 android:contentDescription="@string/descDatePicker"
+                android:background="@color/colorPrimary"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintLeft_toRightOf="@+id/inputDOB"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/inputDOB"
-                app:srcCompat="@android:drawable/ic_menu_my_calendar" />
+                android:onClick="handleOnClick"
+                app:srcCompat="@drawable/calendar" />
 
             <TextView
                 android:id="@+id/lblInputAge"
-                style="@style/textViewStyleAEE"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                style="@style/tvForm"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/inputDOB"
@@ -147,90 +159,70 @@
 
             <EditText
                 android:id="@+id/inputAge"
-                style="@style/editTextStyleAEE"
-                android:layout_width="0dp"
-                android:layout_marginTop="8dp"
-                android:ems="10"
+                style="@style/etForm"
                 android:hint="@string/hintAge"
                 android:inputType="number"
+                android:maxLength="3"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lblInputAge" />
 
             <TextView
                 android:id="@+id/lblInputCountry"
-                style="@style/textViewStyleAEE"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                style="@style/tvForm"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/inputAge"
                 android:text="@string/lblInputCountry"/>
 
             <Spinner
+                style="@style/spinnerForm"
                 android:id="@+id/spinnerCountryPicker"
-
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lblInputCountry" />
+                app:layout_constraintTop_toBottomOf="@+id/lblInputCountry"/>
 
             <TextView
                 android:id="@+id/lblInputGender"
-                style="@style/textViewStyleAEE"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                style="@style/tvForm"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/spinnerCountryPicker"
                 android:text="@string/lblInputGender"/>
 
             <RadioGroup
+                style="@style/rgForm"
                 android:id="@+id/radioGroupGenderSelector"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lblInputGender">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="0dp"
+                    style="@style/tvRadioGroupForm"
                     android:text="Male" />
 
                 <RadioButton
-                    android:layout_width="32dp"
-                    android:layout_height="32dp" />
+                    style="@style/rbForm" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="0dp"
+                    style="@style/tvRadioGroupForm"
                     android:text="Female" />
 
                 <RadioButton
-                    android:layout_width="32dp"
-                    android:layout_height="32dp" />
+                    style="@style/rbForm" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="0dp"
+                    style="@style/tvRadioGroupForm"
                     android:text="Prefer not to say" />
 
                 <RadioButton
-                    android:layout_width="32dp"
-                    android:layout_height="32dp" />
+                    style="@style/rbForm" />
             </RadioGroup>
 
             <TextView
                 android:id="@+id/lblInputAddress"
-                style="@style/textViewStyleAEE"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                style="@style/tvForm"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/radioGroupGenderSelector"
@@ -238,10 +230,8 @@
 
             <EditText
                 android:id="@+id/inputAddress"
-                style="@style/editTextStyleAEE"
-                android:layout_width="0dp"
+                style="@style/etForm"
                 android:layout_height="wrap_content"
-                android:ems="10"
                 android:inputType="textMultiLine"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -254,9 +244,7 @@
 
     <Button
         android:id="@+id/btnNext"
-        style="@style/buttonAEE"
-        android:layout_width="0dp"
-        android:padding="0dp"
+        style="@style/btnNext"
         android:text="@string/btnNext"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideRightEdge"

@@ -6,108 +6,124 @@
     android:layout_height="match_parent"
     tools:context="uk.co.connorglennon.androidengineerexercise.SignUpActivity">
 
-    <fragment
-        android:id="@+id/fragmentTitleBar"
-        android:name="uk.co.connorglennon.androidengineerexercise.TitleBarFragment"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <android.support.constraint.Guideline
         android:id="@+id/guideLeftEdge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="@dimen/leftEdge" />
+        style="@style/guideVertical"
+        app:layout_constraintGuide_percent="0.1"/>
 
     <android.support.constraint.Guideline
         android:id="@+id/guideRightEdge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="@dimen/rightEdge" />
+        style="@style/guideVertical"
+        app:layout_constraintGuide_percent="0.9"/>
 
-    <TextView
-        style="@style/textViewStyleAEE"
-        android:id="@+id/lblInputEmail"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/lblInputEmail"
-        app:layout_constraintEnd_toStartOf="@+id/guideRightEdge"
-        app:layout_constraintStart_toStartOf="@+id/guideLeftEdge"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentTitleBar" />
+    <fragment
+        style="@style/fragmentTitleBar"
+        android:id="@+id/fragmentTitleBar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
-    <EditText
-        style="@style/editTextStyleAEE"
-        android:id="@+id/inputEmail"
-        android:layout_width="0dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="@string/hintEmail"
-        app:layout_constraintEnd_toStartOf="@+id/guideRightEdge"
-        app:layout_constraintStart_toStartOf="@+id/guideLeftEdge"
-        app:layout_constraintTop_toBottomOf="@+id/lblInputEmail" />
+    <ScrollView
+        style="@style/scrollView"
+        app:layout_constraintLeft_toLeftOf="@+id/guideLeftEdge"
+        app:layout_constraintRight_toRightOf="@+id/guideRightEdge"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentTitleBar"
+        app:layout_constraintBottom_toTopOf="@+id/btnNext">
 
-    <TextView
-        style="@style/textViewStyleAEE"
-        android:id="@+id/lblInputPassword1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/lblInputPassword1"
-        app:layout_constraintEnd_toStartOf="@+id/guideRightEdge"
-        app:layout_constraintStart_toStartOf="@+id/guideLeftEdge"
-        app:layout_constraintTop_toBottomOf="@+id/inputEmail" />
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <EditText
-        style="@style/editTextStyleAEE"
-        android:id="@+id/inputPassword1"
-        android:layout_width="0dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="@string/hintPassword1"
-        app:layout_constraintEnd_toStartOf="@+id/guideRightEdge"
-        app:layout_constraintStart_toStartOf="@+id/guideLeftEdge"
-        app:layout_constraintTop_toBottomOf="@+id/lblInputPassword1" />
+            <TextView
+                style="@style/tvForm"
+                android:id="@+id/lblInputEmail"
+                android:text="@string/lblInputEmail"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        style="@style/textViewStyleAEE"
-        android:id="@+id/lblInputPassword2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/lblInputPassword2"
-        app:layout_constraintEnd_toStartOf="@+id/guideRightEdge"
-        app:layout_constraintStart_toStartOf="@+id/guideLeftEdge"
-        app:layout_constraintTop_toBottomOf="@+id/inputPassword1" />
+            <EditText
+                style="@style/etForm"
+                android:id="@+id/inputEmail"
+                android:inputType="textEmailAddress"
+                android:hint="@string/hintEmail"
+                android:maxLength="320"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblInputEmail" />
 
-    <EditText
-        style="@style/editTextStyleAEE"
-        android:id="@+id/inputPassword2"
-        android:layout_width="0dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="@string/hintPassword2"
-        app:layout_constraintEnd_toStartOf="@+id/guideRightEdge"
-        app:layout_constraintStart_toStartOf="@+id/guideLeftEdge"
-        app:layout_constraintTop_toBottomOf="@+id/lblInputPassword2" />
+            <TextView
+                android:id="@+id/lblInputPassword1"
+                style="@style/tvForm"
+                android:text="@string/lblInputPassword1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/inputEmail" />
 
-    <TextView
-        android:id="@+id/passwordRules"
-        style="@style/paragraphStyle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/passwordRules"
-        app:layout_constraintBottom_toTopOf="@+id/btnCreateAccount"
-        app:layout_constraintEnd_toStartOf="@+id/guideRightEdge"
-        app:layout_constraintStart_toStartOf="@+id/guideLeftEdge"
-        app:layout_constraintTop_toBottomOf="@+id/inputPassword2" />
+            <EditText
+                android:id="@+id/inputPassword1"
+                style="@style/etForm"
+                android:hint="@string/hintPassword1"
+                android:inputType="textPassword"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/btnRevealPassword1"
+                app:layout_constraintTop_toBottomOf="@+id/lblInputPassword1" />
+
+            <ImageButton
+                android:id="@+id/btnRevealPassword1"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:background="@color/colorPrimary"
+                app:srcCompat="@drawable/eye"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/inputPassword1"
+                app:layout_constraintBottom_toBottomOf="@+id/inputPassword1"/>
+
+            <TextView
+                style="@style/tvForm"
+                android:id="@+id/lblInputPassword2"
+                android:text="@string/lblInputPassword2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/inputPassword1" />
+
+            <EditText
+                style="@style/etForm"
+                android:id="@+id/inputPassword2"
+                android:inputType="textPassword"
+                android:hint="@string/hintPassword2"
+                app:layout_constraintTop_toBottomOf="@+id/lblInputPassword2"
+                app:layout_constraintRight_toLeftOf="@+id/btnRevealPassword2"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+
+            <ImageButton
+                android:id="@+id/btnRevealPassword2"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:background="@color/colorPrimary"
+                app:srcCompat="@drawable/eye"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/inputPassword2"
+                app:layout_constraintBottom_toBottomOf="@+id/inputPassword2"/>
+
+            <TextView
+                android:id="@+id/passwordRules"
+                style="@style/tvFormInfo"
+                android:text="@string/passwordRules"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/inputPassword2" />
+
+
+        </android.support.constraint.ConstraintLayout>
+
+    </ScrollView>
 
     <Button
-        style="@style/buttonAEE"
-        android:id="@+id/btnCreateAccount"
-        android:layout_width="0dp"
-        android:text="@string/btnNext"
-        android:onClick="handleOnClick"
+        style="@style/btnNext"
+        android:id="@+id/btnNext"
+        android:text="@string/btnNextSignUp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideRightEdge"
         app:layout_constraintLeft_toLeftOf="parent"

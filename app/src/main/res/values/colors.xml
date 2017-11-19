@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#77b800</color>
     <color name="colorLightAccent">#92b650</color>
+
+    <color name="colorEtBorderSuccess">@color/colorAccent</color>
 </resources>
