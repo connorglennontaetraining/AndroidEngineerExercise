@@ -97,4 +97,10 @@ public class RealmController {
 
         return accounts;
     }
+
+    public synchronized void close()
+    {
+        instance = null;
+        realm.close();
+    }
 }

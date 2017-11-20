@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -81,8 +82,6 @@ public class AccountDetailsActivity extends FormActivity implements CalendarDate
             email.setText(getIntent().getStringExtra("email"));
         }
 
-        accountDetails = new RealmAccountDetails();
-
         etForename = (EditText) findViewById(R.id.inputForename);
         etSurname = (EditText) findViewById(R.id.inputSurname);
         etUsername = (EditText) findViewById(R.id.inputUserName);
@@ -136,6 +135,9 @@ public class AccountDetailsActivity extends FormActivity implements CalendarDate
         });
 
         imgProfilepicture = (ImageView) findViewById(R.id.imgProfilePicture);
+
+        accountDetails = new RealmAccountDetails();
+        accountDetails.setProfilePhoto(saveImage(imgProfilepicture.getDrawable()));
     }
 
     @Override
@@ -213,25 +215,29 @@ public class AccountDetailsActivity extends FormActivity implements CalendarDate
                 if (data != null) {
                     Uri path = data.getData();
                     imgProfilepicture.setImageURI(path);
-                    //imgProfilepicture.setImageBitmap(bitmap);
-                    BitmapDrawable drawable = (BitmapDrawable) imgProfilepicture.getDrawable();
-                    Bitmap bitmap = drawable.getBitmap();
-                    accountDetails.setProfilePhoto(saveImage(bitmap));
+                    accountDetails.setProfilePhoto(saveImage(imgProfilepicture.getDrawable()));
                 }
                 break;
             case CAPTURE_IMAGE:
                 Bundle extras = data.getExtras();
                 Bitmap imageBitmap = (Bitmap) extras.get("data");
                 imgProfilepicture.setImageBitmap(imageBitmap);
-                BitmapDrawable drawable = (BitmapDrawable) imgProfilepicture.getDrawable();
-                Bitmap bitmap = drawable.getBitmap();
-                accountDetails.setProfilePhoto(saveImage(bitmap));
+                accountDetails.setProfilePhoto(saveImage(imageBitmap));
                 break;
         }
     }
 
     private byte[] saveImage(Bitmap bitmap)
     {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        return stream.toByteArray();
+    }
+
+    private byte[] saveImage(Drawable drawable)
+    {
+        BitmapDrawable bitmapDrawable = (BitmapDrawable) imgProfilepicture.getDrawable();
+        Bitmap bitmap = bitmapDrawable.getBitmap();
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
         return stream.toByteArray();

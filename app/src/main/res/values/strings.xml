@@ -52,6 +52,7 @@
     <string name="descDatePicker">Calender Icon.</string>
     <string name="cdProfilePicture">Profile picture</string>
     <string name="tvWelcomeBack">Welcome back:</string>
+    <string name="sign_me_in_automatically">Sign me in automatically</string>
 
 
 </resources>

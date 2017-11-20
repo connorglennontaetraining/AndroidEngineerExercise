@@ -1,6 +1,7 @@
 package uk.co.connorglennon.androidengineerexercise;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
