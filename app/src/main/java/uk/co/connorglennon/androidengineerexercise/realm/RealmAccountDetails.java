@@ -1,5 +1,8 @@
 package uk.co.connorglennon.androidengineerexercise.realm;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.RealmResults;
@@ -11,7 +14,8 @@ import io.realm.annotations.LinkingObjects;
 
 public class RealmAccountDetails extends RealmObject {
 
-    private String forename, surname, username, dob, age, country, gender, address, profilePhoto;
+    private String forename, surname, username, dob, age, country, gender, address;
+    private byte[] profilePhoto;
 
     @LinkingObjects("accountDetails")
     private final RealmResults<RealmAccount> account = null;
@@ -21,7 +25,7 @@ public class RealmAccountDetails extends RealmObject {
 
     public RealmAccountDetails(String forename, String surname, String username,
                                String dob, String age, String country, String gender,
-                               String address, String profilePhoto) {
+                               String address, byte[] profilePhoto) {
         this.forename = forename;
         this.surname = surname;
         this.username = username;
@@ -98,11 +102,11 @@ public class RealmAccountDetails extends RealmObject {
         this.address = address;
     }
 
-    public String getProfilePhoto() {
-        return profilePhoto;
+    public Bitmap getProfilePhoto() {
+        return BitmapFactory.decodeByteArray(profilePhoto, 0, profilePhoto.length);
     }
 
-    public void setProfilePhoto(String profilePhoto) {
+    public void setProfilePhoto(byte[] profilePhoto) {
         this.profilePhoto = profilePhoto;
     }
 }

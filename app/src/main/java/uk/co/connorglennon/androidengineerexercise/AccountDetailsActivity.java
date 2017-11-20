@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Environment;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 
 import com.codetroopers.betterpickers.calendardatepicker.CalendarDatePickerDialogFragment;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -199,31 +201,6 @@ public class AccountDetailsActivity extends FormActivity implements CalendarDate
         }
     }
 
-
-    private String saveToInternalStorage(Bitmap bitmapImage){
-        ContextWrapper cw = new ContextWrapper(getApplicationContext());
-        // path to /data/data/yourapp/app_data/imageDir
-        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
-        // Create imageDir
-        File mypath=new File(directory, currentAccount.getEmail() + ".jpg");
-
-        FileOutputStream fos = null;
-        try {
-            fos = new FileOutputStream(mypath);
-            // Use the compress method on the BitMap object to write image to the OutputStream
-            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                fos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return directory.getAbsolutePath();
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -239,7 +216,7 @@ public class AccountDetailsActivity extends FormActivity implements CalendarDate
                     //imgProfilepicture.setImageBitmap(bitmap);
                     BitmapDrawable drawable = (BitmapDrawable) imgProfilepicture.getDrawable();
                     Bitmap bitmap = drawable.getBitmap();
-                    accountDetails.setProfilePhoto(saveToInternalStorage(bitmap));
+                    accountDetails.setProfilePhoto(saveImage(bitmap));
                 }
                 break;
             case CAPTURE_IMAGE:
@@ -248,9 +225,16 @@ public class AccountDetailsActivity extends FormActivity implements CalendarDate
                 imgProfilepicture.setImageBitmap(imageBitmap);
                 BitmapDrawable drawable = (BitmapDrawable) imgProfilepicture.getDrawable();
                 Bitmap bitmap = drawable.getBitmap();
-                accountDetails.setProfilePhoto(saveToInternalStorage(bitmap));
+                accountDetails.setProfilePhoto(saveImage(bitmap));
                 break;
         }
+    }
+
+    private byte[] saveImage(Bitmap bitmap)
+    {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        return stream.toByteArray();
     }
 
     @Override

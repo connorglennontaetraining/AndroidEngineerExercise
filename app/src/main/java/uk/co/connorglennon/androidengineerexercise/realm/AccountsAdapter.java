@@ -50,16 +50,8 @@ public class AccountsAdapter extends RecyclerView.Adapter<AccountsAdapter.MyView
         RealmAccount account = accounts.get(position);
         RealmAccountDetails accountDetails = account.getAccountDetails();
 
-        try {
-            //File f=new File(accountDetails.getProfilePhoto(), "profile.jpg");
-            File f=new File(accountDetails.getProfilePhoto());
-            Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(f));
-            holder.ivProfilePicture.setImageBitmap(bitmap);
-        }
-        catch (FileNotFoundException e)
-        {
-            e.printStackTrace();
-        }
+        holder.ivProfilePicture.setImageBitmap(accountDetails.getProfilePhoto());
+
         holder.tvAddress.setText(accountDetails.getAddress());
         holder.tvAge.setText(accountDetails.getAge());
         holder.tvCountry.setText(accountDetails.getCountry());
@@ -67,6 +59,7 @@ public class AccountsAdapter extends RecyclerView.Adapter<AccountsAdapter.MyView
         holder.tvForename.setText(accountDetails.getForename());
         holder.tvSurname.setText(accountDetails.getSurname());
         holder.tvUsername.setText(accountDetails.getUsername());
+        holder.tvGender.setText(accountDetails.getGender());
     }
 
     @Override

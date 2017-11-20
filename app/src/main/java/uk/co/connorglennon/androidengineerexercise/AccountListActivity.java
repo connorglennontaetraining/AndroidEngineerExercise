@@ -37,14 +37,13 @@ public class AccountListActivity extends AppCompatActivity {
             currentAccount = RealmController.getInstance().getAccount(getIntent().getStringExtra("email"));
             RealmAccountDetails accountDetails = currentAccount.getAccountDetails();
             ImageView profilePicture = (ImageView) findViewById(R.id.profilePicture);
-            profilePicture.setImageURI(Uri.parse(accountDetails.getProfilePhoto()));
+            profilePicture.setImageBitmap(accountDetails.getProfilePhoto());
 
             TextView forename = (TextView) findViewById(R.id.forename);
             forename.setText(accountDetails.getForename());
-            forename.setText("TESTING");
 
             TextView surname = (TextView) findViewById(R.id.surname);
-            forename.setText(accountDetails.getSurname());
+            surname.setText(accountDetails.getSurname());
         }
 
         realmController = RealmController.getInstance();
