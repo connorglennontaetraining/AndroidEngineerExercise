@@ -13,7 +13,7 @@ import uk.co.connorglennon.androidengineerexercise.AccountDetailsActivity;
  * Created by Connor Glennon on 19/11/2017.
  */
 
-public class RealmAccount extends RealmObject{
+public class RealmAccount extends RealmObject {
     /*
     * copyToRealmOrUpdate when there is a primary key.
     * define a primary key with @PrimaryKey.
