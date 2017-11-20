@@ -151,4 +151,9 @@
         <item name="bpButtonsBackgroundColor">@color/colorPrimaryDark</item>
         <item name="bpButtonsTextColor">@color/colorAccent</item>
     </style>
+
+    <!-- Recycler View style -->
+    <style name="rvTextView">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
 </resources>

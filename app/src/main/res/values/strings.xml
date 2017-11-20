@@ -38,19 +38,20 @@
     </string>
 
 
-
-
     <string name="btnChangeProfilePicture">Change</string>
     <string name="btnNext">Next</string>
     <string name="btnNextCreateAccount">Create account</string>
     <string name="btnNextSignUp">Sign up</string>
     <string name="btnNextSaveDetails">Save details</string>
+    <string name="btnNextSignIn">Sign in</string>
 
 
     <string name="titlePlaceholder">Activity Title</string>
 
     <string name="descProfilePicture">Your current profile picture.</string>
     <string name="descDatePicker">Calender Icon.</string>
+    <string name="cdProfilePicture">Profile picture</string>
+    <string name="tvWelcomeBack">Welcome back:</string>
 
 
 </resources>

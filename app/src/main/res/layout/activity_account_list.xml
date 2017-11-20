@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="uk.co.connorglennon.androidengineerexercise.AccountListActivity">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideLeftEdge"
+        style="@style/guideVertical"
+        app:layout_constraintGuide_percent="0.1"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideRightEdge"
+        style="@style/guideVertical"
+        app:layout_constraintGuide_percent="0.9"/>
+
+    <fragment
+        android:id="@+id/fragmentTitleBar"
+        style="@style/fragmentTitleBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:name="uk.co.connorglennon.androidengineerexercise.TitleBarFragment"
+        tools:layout="@layout/fragment_title_bar" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvAccounts"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/guideLeftEdge"
+        app:layout_constraintRight_toRightOf="@id/guideRightEdge"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragmentTitleBar">
+
+        <ImageView
+            android:id="@+id/profilePicture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@mipmap/ic_launcher" android:contentDescription="@string/cdProfilePicture" />
+
+        <TextView
+            android:id="@+id/tvWelcomeBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:text="@string/tvWelcomeBack"
+            app:layout_constraintBottom_toBottomOf="@+id/profilePicture"
+            app:layout_constraintStart_toEndOf="@+id/profilePicture"
+            app:layout_constraintTop_toTopOf="@+id/profilePicture" />
+
+        <TextView
+            android:id="@+id/forename"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:text="@string/lblInputForename"
+            app:layout_constraintBottom_toBottomOf="@+id/tvWelcomeBack"
+            app:layout_constraintStart_toEndOf="@+id/tvWelcomeBack"
+            app:layout_constraintTop_toTopOf="@+id/tvWelcomeBack" />
+
+        <TextView
+            android:id="@+id/surname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/lblInputSurname"
+            app:layout_constraintBottom_toBottomOf="@+id/forename"
+            app:layout_constraintStart_toEndOf="@+id/forename"
+            app:layout_constraintTop_toTopOf="@+id/forename" />
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>

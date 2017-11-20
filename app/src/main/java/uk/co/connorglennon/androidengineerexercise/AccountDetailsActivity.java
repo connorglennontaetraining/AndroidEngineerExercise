@@ -1,47 +1,41 @@
 package uk.co.connorglennon.androidengineerexercise;
 
-import android.Manifest;
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.database.StaleDataException;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.FileProvider;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
-import android.widget.Switch;
 import android.widget.Toast;
 
 import com.codetroopers.betterpickers.calendardatepicker.CalendarDatePickerDialogFragment;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Date;
 import java.util.Locale;
 
-import uk.co.connorglennon.androidengineerexercise.validation.ButtonFormHandler;
-import uk.co.connorglennon.androidengineerexercise.validation.EditTextFormHandler;
+import uk.co.connorglennon.androidengineerexercise.realm.RealmAccount;
+import uk.co.connorglennon.androidengineerexercise.realm.RealmAccountDetails;
+import uk.co.connorglennon.androidengineerexercise.realm.RealmController;
+import uk.co.connorglennon.androidengineerexercise.validation.ButtonHandler;
+import uk.co.connorglennon.androidengineerexercise.validation.EditTextHandler;
 import uk.co.connorglennon.androidengineerexercise.validation.FormActivity;
-import uk.co.connorglennon.androidengineerexercise.validation.InputValidator;
 
 public class AccountDetailsActivity extends FormActivity implements CalendarDatePickerDialogFragment.OnDateSetListener{
 
@@ -50,12 +44,17 @@ public class AccountDetailsActivity extends FormActivity implements CalendarDate
     public static final int PICK_IMAGE = 1;
     public static final int CAPTURE_IMAGE = 2;
 
+    RealmAccount currentAccount;
+    RealmAccountDetails accountDetails;
+
     Button btnNext, btnChangePhoto;
     private boolean hasForename, hasSurname, hasUsername, hasDOB,
             hasAge, hasCountry, hasGender, hasAddress;
 
     private EditText etForename, etSurname, etUsername, etDOB, etAge, etAddress;
     private Spinner spinnerCountry;
+    private RadioGroup rgGender;
+    private RadioButton rbChecked;
     private ImageView imgProfilepicture;
 
     @Override
@@ -66,6 +65,22 @@ public class AccountDetailsActivity extends FormActivity implements CalendarDate
         btnNext = (Button) findViewById(R.id.btnNext);
         checkValidation();
 
+        currentAccount = RealmController.getInstance()
+                .getAccount(getIntent().getStringExtra("email"));
+
+        if(currentAccount == null)
+        {
+            Toast.makeText(this, "Error loading account", Toast.LENGTH_LONG).show();
+            finish();
+        }
+        else
+        {
+            EditText email = (EditText) findViewById(R.id.inputEmail);
+            email.setText(getIntent().getStringExtra("email"));
+        }
+
+        accountDetails = new RealmAccountDetails();
+
         etForename = (EditText) findViewById(R.id.inputForename);
         etSurname = (EditText) findViewById(R.id.inputSurname);
         etUsername = (EditText) findViewById(R.id.inputUserName);
@@ -73,12 +88,12 @@ public class AccountDetailsActivity extends FormActivity implements CalendarDate
         etAge = (EditText) findViewById(R.id.inputAge);
         etAddress = (EditText) findViewById(R.id.inputAddress);
 
-        EditTextFormHandler.addValidator(this, etForename, "", "Invalid forename");
-        EditTextFormHandler.addValidator(this, etSurname, "", "Invalid surname");
-        EditTextFormHandler.addValidator(this, etUsername, "", "Invalid username");
-        EditTextFormHandler.addValidator(this, etDOB, "", "Invalid dob");
-        EditTextFormHandler.addValidator(this, etAge, "", "Invalid age");
-        EditTextFormHandler.addValidator(this, etAddress, "", "Invalid address");
+        EditTextHandler.addValidator(this, etForename, "", "Invalid forename");
+        EditTextHandler.addValidator(this, etSurname, "", "Invalid surname");
+        EditTextHandler.addValidator(this, etUsername, "", "Invalid username");
+        EditTextHandler.addValidator(this, etDOB, "", "Invalid dob");
+        EditTextHandler.addValidator(this, etAge, "", "Invalid age");
+        EditTextHandler.addValidator(this, etAddress, "", "Invalid address");
 
         hasForename = false;
         hasSurname = false;
@@ -91,6 +106,32 @@ public class AccountDetailsActivity extends FormActivity implements CalendarDate
 
         spinnerCountry = (Spinner)findViewById(R.id.spinnerCountryPicker);
         initSpinner(spinnerCountry);
+        /*
+        TODO: Redo radio buttons in a better way.
+         */
+        rgGender = (RadioGroup) findViewById(R.id.radioGroupGenderSelector);
+        rgGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                rbChecked = (RadioButton) findViewById(i);
+                hasGender = true;
+                switch(i)
+                {
+                    case R.id.rbMale:
+                        accountDetails.setGender("Male");
+                        checkValidation();
+                        break;
+                    case R.id.rbFemale:
+                        accountDetails.setGender("Female");
+                        checkValidation();
+                        break;
+                    case R.id.rbNotSpecified:
+                        accountDetails.setGender("Prefer not to say");
+                        checkValidation();
+                        break;
+                }
+                }
+        });
 
         imgProfilepicture = (ImageView) findViewById(R.id.imgProfilePicture);
     }
@@ -103,11 +144,29 @@ public class AccountDetailsActivity extends FormActivity implements CalendarDate
         titleBarFragment.setTitle("Edit Details");
     }
 
+    public void initAccountDetails()
+    {
+        accountDetails.setForename(etForename.getText().toString());
+        accountDetails.setSurname(etSurname.getText().toString());
+        accountDetails.setUsername(etUsername.getText().toString());
+        accountDetails.setDob(etDOB.getText().toString());
+        accountDetails.setAge(etAge.getText().toString());
+        accountDetails.setCountry(spinnerCountry.getSelectedItem().toString());
+        accountDetails.setAddress(etAddress.getText().toString());
+    }
+
     public void handleOnClick(View view)
     {
         switch (view.getId())
         {
             case R.id.btnNext:
+
+                initAccountDetails();
+                RealmController.getInstance().saveAccountDetails(currentAccount, accountDetails);
+                RealmController.getInstance().saveAccount(currentAccount);
+                Intent intent = new Intent(this, WelcomeActivity.class);
+                startActivity(intent);
+
                 break;
             case R.id.btnDatePicker:
                 CalendarDatePickerDialogFragment cdp = new CalendarDatePickerDialogFragment()
@@ -134,10 +193,36 @@ public class AccountDetailsActivity extends FormActivity implements CalendarDate
                     startActivityForResult(takePictureIntent, CAPTURE_IMAGE);
                 }
                 break;
+            case R.id.btnBack:
+                onBackPressed();
+                break;
         }
     }
 
 
+    private String saveToInternalStorage(Bitmap bitmapImage){
+        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+        // path to /data/data/yourapp/app_data/imageDir
+        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+        // Create imageDir
+        File mypath=new File(directory, currentAccount.getEmail() + ".jpg");
+
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(mypath);
+            // Use the compress method on the BitMap object to write image to the OutputStream
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return directory.getAbsolutePath();
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -152,12 +237,18 @@ public class AccountDetailsActivity extends FormActivity implements CalendarDate
                     Uri path = data.getData();
                     imgProfilepicture.setImageURI(path);
                     //imgProfilepicture.setImageBitmap(bitmap);
+                    BitmapDrawable drawable = (BitmapDrawable) imgProfilepicture.getDrawable();
+                    Bitmap bitmap = drawable.getBitmap();
+                    accountDetails.setProfilePhoto(saveToInternalStorage(bitmap));
                 }
                 break;
             case CAPTURE_IMAGE:
                 Bundle extras = data.getExtras();
                 Bitmap imageBitmap = (Bitmap) extras.get("data");
                 imgProfilepicture.setImageBitmap(imageBitmap);
+                BitmapDrawable drawable = (BitmapDrawable) imgProfilepicture.getDrawable();
+                Bitmap bitmap = drawable.getBitmap();
+                accountDetails.setProfilePhoto(saveToInternalStorage(bitmap));
                 break;
         }
     }
@@ -207,14 +298,13 @@ public class AccountDetailsActivity extends FormActivity implements CalendarDate
     @Override
     protected void checkValidation() {
         if(hasForename && hasSurname && hasUsername
-                && hasDOB && hasAge && hasCountry && hasGender
-                && hasAddress)
+                && hasDOB && hasAge && hasGender)
         {
-            ButtonFormHandler.enableButton(btnNext);
+            ButtonHandler.enableButton(btnNext);
         }
         else
         {
-            ButtonFormHandler.disableButton(btnNext);
+            ButtonHandler.disableButton(btnNext);
         }
     }
 
@@ -245,11 +335,13 @@ public class AccountDetailsActivity extends FormActivity implements CalendarDate
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 hasCountry = true;
+                checkValidation();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
                 hasCountry = false;
+                checkValidation();
             }
         });
     }

@@ -4,11 +4,12 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 public class WelcomeActivity extends AppCompatActivity {
 
-    private static Class dest = SignUpActivity.class;
+    private static Class createAccountDest = SignUpActivity.class;
+    private static Class signInDest = SignInActivity.class;
+    private Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,8 +20,12 @@ public class WelcomeActivity extends AppCompatActivity {
     {
         switch(view.getId())
         {
-            case R.id.btnNext:
-                Intent intent = new Intent(this, dest);
+            case R.id.btnCreateAccount:
+                intent = new Intent(this, createAccountDest);
+                startActivity(intent);
+                break;
+            case R.id.btnSignIn:
+                intent = new Intent(this, signInDest);
                 startActivity(intent);
                 break;
         }

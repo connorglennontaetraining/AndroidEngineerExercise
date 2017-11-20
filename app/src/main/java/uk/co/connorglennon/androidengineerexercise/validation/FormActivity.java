@@ -11,21 +11,21 @@ public abstract class FormActivity extends AppCompatActivity implements InputVal
 
     @Override
     public void isValid(EditText editText) {
-        EditTextFormHandler.setValid(editText, null);
+        EditTextHandler.setValid(editText, null);
         setFlag(editText, true);
         checkValidation();
     }
 
     @Override
     public void isInvalid(EditText editText, String message) {
-        EditTextFormHandler.setInvalid(editText, message);
+        EditTextHandler.setInvalid(editText, message);
         setFlag(editText, false);
         checkValidation();
     }
 
     @Override
     public void hasNoData(EditText editText) {
-        EditTextFormHandler.resetValid(editText);
+        EditTextHandler.resetValid(editText);
         setFlag(editText, false);
         checkValidation();
     }
