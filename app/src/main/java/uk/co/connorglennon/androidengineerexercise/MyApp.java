@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2017. Connor Glennon All rights reserved.
+ * Licenced under the Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)
+ * You may view the license at: https://creativecommons.org/licenses/by-nc-nd/4.0/
+ */
+
 package uk.co.connorglennon.androidengineerexercise;
 
 import android.app.Application;
@@ -19,10 +25,6 @@ import io.realm.RealmConfiguration;
 import uk.co.connorglennon.androidengineerexercise.greendao.DaoMaster;
 import uk.co.connorglennon.androidengineerexercise.greendao.DaoSession;
 import uk.co.connorglennon.androidengineerexercise.realm.RealmController;
-
-/**
- * Created by Connor Glennon on 18/11/2017.
- */
 
 public class MyApp extends Application {
 
