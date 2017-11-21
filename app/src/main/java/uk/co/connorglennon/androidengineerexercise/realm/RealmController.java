@@ -1,13 +1,11 @@
 package uk.co.connorglennon.androidengineerexercise.realm;
 
-import android.util.Base64;
 import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import io.realm.Realm;
-import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
 import uk.co.connorglennon.androidengineerexercise.MyApp;
 
@@ -32,11 +30,6 @@ public class RealmController {
             }
         }
         return instance;
-    }
-
-    public static void initialise()
-    {
-
     }
 
     Realm realm;
