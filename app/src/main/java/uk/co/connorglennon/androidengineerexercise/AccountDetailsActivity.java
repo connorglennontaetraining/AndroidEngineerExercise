@@ -1,14 +1,10 @@
 package uk.co.connorglennon.androidengineerexercise;
 
-import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.os.Bundle;
 import android.view.View;
@@ -25,11 +21,7 @@ import android.widget.Toast;
 import com.codetroopers.betterpickers.calendardatepicker.CalendarDatePickerDialogFragment;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Locale;
 
@@ -63,7 +55,7 @@ public class AccountDetailsActivity extends FormActivity implements CalendarDate
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_account_details);
+        setContentView(R.layout.fragment_account_details);
 
         btnNext = (Button) findViewById(R.id.btnNext);
         checkValidation();
@@ -88,13 +80,6 @@ public class AccountDetailsActivity extends FormActivity implements CalendarDate
         etDOB = (EditText) findViewById(R.id.inputDOB);
         etAge = (EditText) findViewById(R.id.inputAge);
         etAddress = (EditText) findViewById(R.id.inputAddress);
-
-        EditTextHandler.addValidator(this, etForename, "", "Invalid forename");
-        EditTextHandler.addValidator(this, etSurname, "", "Invalid surname");
-        EditTextHandler.addValidator(this, etUsername, "", "Invalid username");
-        EditTextHandler.addValidator(this, etDOB, "", "Invalid dob");
-        EditTextHandler.addValidator(this, etAge, "", "Invalid age");
-        EditTextHandler.addValidator(this, etAddress, "", "Invalid address");
 
         hasForename = false;
         hasSurname = false;
@@ -168,7 +153,7 @@ public class AccountDetailsActivity extends FormActivity implements CalendarDate
                 initAccountDetails();
                 RealmController.getInstance().saveAccountDetails(currentAccount, accountDetails);
                 RealmController.getInstance().saveAccount(currentAccount);
-                Intent intent = new Intent(this, WelcomeActivity.class);
+                Intent intent = new Intent(this, WelcomeFragment.class);
                 startActivity(intent);
 
                 break;

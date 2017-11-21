@@ -9,18 +9,24 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".WelcomeActivity">
+        android:theme="@style/GreenFlag">
+        <!-- Legacy pre fragment activities -->
+        <!--<activity android:name=".WelcomeActivity">
+        </activity>
+        <activity android:name=".SignUpActivity" />
+        <activity android:name=".AccountDetailsActivity" />
+        <activity android:name=".SignInActivity" />
+        <activity android:name=".AccountListActivity" />-->
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/GreenFlag">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignUpActivity" />
-        <activity android:name=".AccountDetailsActivity" />
-        <activity android:name=".SignInActivity" />
-        <activity android:name=".AccountListActivity"></activity>
     </application>
 
 </manifest>

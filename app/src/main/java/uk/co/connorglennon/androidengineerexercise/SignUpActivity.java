@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import uk.co.connorglennon.androidengineerexercise.realm.RealmAccount;
 import uk.co.connorglennon.androidengineerexercise.realm.RealmAccountDetails;
@@ -14,10 +13,9 @@ import uk.co.connorglennon.androidengineerexercise.realm.RealmController;
 import uk.co.connorglennon.androidengineerexercise.validation.ButtonHandler;
 import uk.co.connorglennon.androidengineerexercise.validation.EditTextHandler;
 import uk.co.connorglennon.androidengineerexercise.validation.FormActivity;
-import uk.co.connorglennon.androidengineerexercise.validation.RegexValidatorTextWatcher;
-import uk.co.connorglennon.androidengineerexercise.validation.InputValidatorListener;
+import uk.co.connorglennon.androidengineerexercise.validation.ValidatableEditText;
 
-public class SignUpActivity extends FormActivity implements InputValidatorListener{
+public class SignUpActivity extends FormActivity implements ValidationListener {
 
     private static Class dest = AccountDetailsActivity.class;
 
@@ -31,13 +29,12 @@ public class SignUpActivity extends FormActivity implements InputValidatorListen
     Button btnNext;
     ImageButton btnRevealPassword1, btnRevealPassword2;
 
-    private EditText etEmail, etPassword1, etPassword2;
-    private RegexValidatorTextWatcher emailValidator, password1Validator, password2Validator;
+    private ValidatableEditText etEmail, etPassword1, etPassword2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
+        setContentView(R.layout.fragment_sign_up);
 
         signUpAccount = new RealmAccount();
 
@@ -62,13 +59,9 @@ public class SignUpActivity extends FormActivity implements InputValidatorListen
         TODO: Consider moving object creation to the addValidator method or another factory method.
         ****** This could reduce lines of code further.
          */
-        etEmail = (EditText) findViewById(R.id.inputEmail);
-        etPassword1 = (EditText) findViewById(R.id.inputPassword1);
-        etPassword2 = (EditText) findViewById(R.id.inputPassword2);
 
-        EditTextHandler.addValidator(this, etEmail, Constants.REGEX_EMAIL_RFC5332_OFFICIAL_STANDARD, "Invalid email");
-        EditTextHandler.addValidator(this, etPassword1, Constants.REGEX_PASSWORD, "Invalid password");
-        EditTextHandler.addValidator(this, etPassword2, Constants.REGEX_PASSWORD, "Invalid password");
+
+
     }
 
     @Override
@@ -81,8 +74,8 @@ public class SignUpActivity extends FormActivity implements InputValidatorListen
 
     public void initAccount()
     {
-        signUpAccount.setEmail(etEmail.getText().toString());
-        signUpAccount.setPassword(etPassword1.getText().toString());
+        signUpAccount.setEmail(etEmail.editText.getText().toString());
+        signUpAccount.setPassword(etPassword1.editText.getText().toString());
         signUpAccount.setAccountDetails(new RealmAccountDetails());
     }
 
@@ -90,8 +83,8 @@ public class SignUpActivity extends FormActivity implements InputValidatorListen
     {
         if(RealmController.getInstance().isEmailUsed(signUpAccount.getEmail()))
         {
-            InputValidatorListener listener = this;
-            listener.isInvalid(etEmail, "Email already in use");
+            ValidationListener listener = this;
+            listener.isInvalid(etEmail.editText, "Email already in use");
             return false;
         }
         return true;
@@ -117,11 +110,11 @@ public class SignUpActivity extends FormActivity implements InputValidatorListen
                 }
                 break;
             case R.id.btnRevealPassword1:
-                EditTextHandler.togglePassword(etPassword1);
+                EditTextHandler.togglePassword(etPassword1.editText);
                 toggleEye(btnRevealPassword1);
                 break;
             case R.id.btnRevealPassword2:
-                EditTextHandler.togglePassword(etPassword2);
+                EditTextHandler.togglePassword(etPassword2.editText);
                 toggleEye(btnRevealPassword2);
                 break;
             case R.id.btnBack:
@@ -164,13 +157,13 @@ public class SignUpActivity extends FormActivity implements InputValidatorListen
     protected void checkValidation()
     {
         if(isValidEmail && isValidPassword1 && isValidPassword2) {
-            if (etPassword1.getText().toString().equals(etPassword2.getText().toString())) {
+            if (etPassword1.editText.getText().toString().equals(etPassword2.editText.getText().toString())) {
                 ButtonHandler.enableButton(btnNext);
                 return;
             }
             else
             {
-                EditTextHandler.setInvalid(etPassword2, "Passwords do not match");
+                EditTextHandler.setInvalid(etPassword2.editText, "Passwords do not match", MyApp.cross);
                 ButtonHandler.disableButton(btnNext);
             }
         }

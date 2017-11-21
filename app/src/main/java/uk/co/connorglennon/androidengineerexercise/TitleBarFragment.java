@@ -24,6 +24,16 @@ public class TitleBarFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View fragment = inflater.inflate(R.layout.fragment_title_bar, container);
         tvTitle = (TextView) fragment.findViewById(R.id.tvTitle);
+
+        btnBack = (Button) container.findViewById(R.id.btnBack);
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().finish();
+            }
+        });
+
         return fragment;
     }
 

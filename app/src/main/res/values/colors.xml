@@ -4,7 +4,9 @@
     <color name="colorPrimaryFaded">#88e7e7e7</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#77b800</color>
-    <color name="colorLightAccent">#92b650</color>
+    <color name="colorLightAccent">#7fc400</color>
+    <color name="colorDarkAccent">#538000</color>
 
     <color name="colorEtBorderSuccess">@color/colorAccent</color>
+    <color name="accent_material_dark_1">#77b800</color>
 </resources>

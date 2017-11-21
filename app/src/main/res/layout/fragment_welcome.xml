@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="uk.co.connorglennon.androidengineerexercise.WelcomeActivity">
+    tools:context="uk.co.connorglennon.androidengineerexercise.WelcomeFragment">
 
     <android.support.constraint.Guideline
         android:id="@+id/guideLeftEdge"
@@ -31,85 +31,90 @@
     <ScrollView
         style="@style/scrollView"
         android:layout_marginTop="64dp"
-        app:layout_constraintTop_toBottomOf="@id/imgLogo"
-        app:layout_constraintBottom_toTopOf="@id/btnCreateAccount"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="@id/guideLeftEdge"
-        app:layout_constraintRight_toRightOf="@id/guideRightEdge">
+        app:layout_constraintRight_toRightOf="@id/guideRightEdge"
+        app:layout_constraintTop_toBottomOf="@id/imgLogo"
+        app:layout_constraintVertical_bias="0.0">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:paddingLeft="16dp"
             android:paddingRight="16dp">
 
             <TextView
-                style="@style/tvForm"
                 android:id="@+id/tvWelcomeText"
-                android:textSize="20sp"
-                android:text="@string/tvWelcomeText"/>
+                style="@style/tvForm"
+                android:text="@string/tvWelcomeText"
+                android:textSize="20sp" />
 
             <ImageView
-                style="@style/imgTick"
                 android:id="@+id/imgTick1"
-                app:srcCompat="@drawable/tick"
+                style="@style/imgTick"
                 app:layout_constraintTop_toBottomOf="@id/tvWelcomeText"
-                />
+                app:srcCompat="@drawable/tick" />
 
             <TextView
-                style="@style/tvWelcomeScreenListItem"
                 android:id="@+id/tvWelcomeListItem1"
+                style="@style/tvWelcomeScreenListItem"
                 android:text="@string/tvWelcomeListItem1"
+                app:layout_constraintBottom_toBottomOf="@id/imgTick1"
                 app:layout_constraintLeft_toRightOf="@id/imgTick1"
-                app:layout_constraintTop_toTopOf="@id/imgTick1"
-                app:layout_constraintBottom_toBottomOf="@id/imgTick1"/>
+                app:layout_constraintTop_toTopOf="@id/imgTick1" />
 
             <ImageView
-                style="@style/imgTick"
                 android:id="@+id/imgTick2"
-                app:srcCompat="@drawable/tick"
-                app:layout_constraintTop_toBottomOf="@id/imgTick1"/>
+                style="@style/imgTick"
+                app:layout_constraintTop_toBottomOf="@id/imgTick1"
+                app:srcCompat="@drawable/tick" />
 
             <TextView
-                style="@style/tvWelcomeScreenListItem"
                 android:id="@+id/tvWelcomeListItem2"
+                style="@style/tvWelcomeScreenListItem"
                 android:text="@string/tvWelcomeListItem2"
+                app:layout_constraintBottom_toBottomOf="@id/imgTick2"
                 app:layout_constraintLeft_toRightOf="@id/imgTick2"
-                app:layout_constraintTop_toTopOf="@id/imgTick2"
-                app:layout_constraintBottom_toBottomOf="@id/imgTick2"/>
+                app:layout_constraintTop_toTopOf="@id/imgTick2" />
 
             <ImageView
-                style="@style/imgTick"
                 android:id="@+id/imgTick3"
-                app:srcCompat="@drawable/tick"
-                app:layout_constraintTop_toBottomOf="@id/imgTick2"/>
+                style="@style/imgTick"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/imgTick2"
+                app:layout_constraintStart_toStartOf="@+id/imgTick2"
+                app:layout_constraintTop_toBottomOf="@id/imgTick2"
+                app:layout_constraintVertical_bias="0.0"
+                app:srcCompat="@drawable/tick" />
 
             <TextView
-                style="@style/tvWelcomeScreenListItem"
                 android:id="@+id/tvWelcomeListItem3"
+                style="@style/tvWelcomeScreenListItem"
                 android:text="@string/tvWelcomeListItem3"
+                app:layout_constraintBottom_toBottomOf="@id/imgTick3"
                 app:layout_constraintLeft_toRightOf="@id/imgTick3"
-                app:layout_constraintTop_toTopOf="@id/imgTick3"
-                app:layout_constraintBottom_toBottomOf="@id/imgTick3"/>
+                app:layout_constraintTop_toTopOf="@id/imgTick3" />
 
         </android.support.constraint.ConstraintLayout>
 
 
     </ScrollView>
 
-    <Button
-        android:id="@+id/btnCreateAccount"
-        style="@style/btnNext"
-        android:text="@string/btnNextCreateAccount"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@id/btnSignIn"
-        app:layout_constraintLeft_toLeftOf="@id/guideLeftEdge"
-        app:layout_constraintRight_toRightOf="@id/guideRightEdge"/>
+    <!--<Button-->
+        <!--android:id="@+id/btnCreateAccount"-->
+        <!--style="@style/btnNext"-->
+        <!--android:text="@string/btnNextCreateAccount"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--app:layout_constraintBottom_toTopOf="@id/btnSignIn"-->
+        <!--app:layout_constraintLeft_toLeftOf="@id/guideLeftEdge"-->
+        <!--app:layout_constraintRight_toRightOf="@id/guideRightEdge"-->
+        <!--gone/>-->
 
-    <Button
-        android:id="@+id/btnSignIn"
-        style="@style/btnNext"
-        android:text="@string/btnNextSignIn"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="@id/guideLeftEdge"
-        app:layout_constraintRight_toRightOf="@id/guideRightEdge"/>
+    <!--<Button-->
+        <!--android:id="@+id/btnSignIn"-->
+        <!--style="@style/btnNext"-->
+        <!--android:text="@string/btnNextSignIn"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintLeft_toLeftOf="@id/guideLeftEdge"-->
+        <!--app:layout_constraintRight_toRightOf="@id/guideRightEdge"/>-->
 </android.support.constraint.ConstraintLayout>

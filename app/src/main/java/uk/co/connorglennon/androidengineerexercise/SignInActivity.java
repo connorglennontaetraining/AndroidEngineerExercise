@@ -1,9 +1,6 @@
 package uk.co.connorglennon.androidengineerexercise;
 
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.media.Image;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,7 +12,6 @@ import uk.co.connorglennon.androidengineerexercise.realm.RealmController;
 import uk.co.connorglennon.androidengineerexercise.validation.ButtonHandler;
 import uk.co.connorglennon.androidengineerexercise.validation.EditTextHandler;
 import uk.co.connorglennon.androidengineerexercise.validation.FormActivity;
-import uk.co.connorglennon.androidengineerexercise.validation.InputValidatorListener;
 
 public class SignInActivity extends FormActivity {
 
@@ -29,13 +25,10 @@ public class SignInActivity extends FormActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_in);
+        setContentView(R.layout.fragment_sign_in);
 
         etEmail = (EditText) findViewById(R.id.inputEmail);
         etPassword1 = (EditText) findViewById(R.id.inputPassword1);
-
-        EditTextHandler.addValidator(this, etEmail, Constants.REGEX_EMAIL_RFC5332_OFFICIAL_STANDARD, "Invalid email");
-        EditTextHandler.addValidator(this, etPassword1, Constants.REGEX_PASSWORD, "Invalid password");
 
         btnRevealPassword1 = (ImageButton) findViewById(R.id.btnRevealPassword1);
         btnRevealPassword1.setTag(0);
@@ -59,13 +52,13 @@ public class SignInActivity extends FormActivity {
                     }
                     else
                     {
-                        InputValidatorListener listener = this;
+                        ValidationListener listener = this;
                         listener.isInvalid(etPassword1, "Incorrect password");
                     }
                 }
                 else
                 {
-                    InputValidatorListener listener = this;
+                    ValidationListener listener = this;
                     listener.isInvalid(etEmail, "No account with this email");
                 }
                 break;

@@ -16,19 +16,12 @@
         style="@style/guideVertical"
         app:layout_constraintGuide_percent="0.9"/>
 
-    <fragment
-        style="@style/fragmentTitleBar"
-        android:id="@+id/fragmentTitleBar"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ScrollView
         style="@style/scrollView"
-        app:layout_constraintBottom_toTopOf="@id/btnNext"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/guideLeftEdge"
         app:layout_constraintRight_toLeftOf="@+id/guideRightEdge"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentTitleBar">
+        app:layout_constraintTop_toTopOf="parent">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -119,7 +112,6 @@
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/photo_library"
                 android:background="@color/colorPrimary"
-                android:onClick="handleOnClick"
                 app:layout_constraintTop_toBottomOf="@+id/imgProfilePicture"
                 app:layout_constraintLeft_toLeftOf="@+id/imgProfilePicture"
                 app:layout_constraintRight_toLeftOf="@+id/btnChangePhotoCamera" />
@@ -130,7 +122,6 @@
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/camera"
                 android:background="@color/colorPrimary"
-                android:onClick="handleOnClick"
                 app:layout_constraintTop_toBottomOf="@+id/imgProfilePicture"
                 app:layout_constraintLeft_toRightOf="@+id/btnChangePhotoGallery"
                 app:layout_constraintRight_toRightOf="@+id/imgProfilePicture" />
@@ -164,7 +155,6 @@
                 app:layout_constraintLeft_toRightOf="@+id/inputDOB"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/inputDOB"
-                android:onClick="handleOnClick"
                 app:srcCompat="@drawable/calendar" />
 
             <TextView
@@ -262,12 +252,4 @@
         </android.support.constraint.ConstraintLayout>
 
     </ScrollView>
-
-    <Button
-        android:id="@+id/btnNext"
-        style="@style/btnNext"
-        android:text="@string/btnNext"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideRightEdge"
-        app:layout_constraintStart_toStartOf="@+id/guideLeftEdge" />
 </android.support.constraint.ConstraintLayout>

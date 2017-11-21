@@ -1,8 +1,5 @@
 package uk.co.connorglennon.androidengineerexercise;
 
-import android.accounts.Account;
-import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,8 +14,6 @@ import uk.co.connorglennon.androidengineerexercise.realm.AccountsAdapter;
 import uk.co.connorglennon.androidengineerexercise.realm.RealmAccount;
 import uk.co.connorglennon.androidengineerexercise.realm.RealmAccountDetails;
 import uk.co.connorglennon.androidengineerexercise.realm.RealmController;
-import uk.co.connorglennon.androidengineerexercise.validation.EditTextHandler;
-import uk.co.connorglennon.androidengineerexercise.validation.InputValidatorListener;
 
 public class AccountListActivity extends AppCompatActivity {
 
@@ -29,7 +24,7 @@ public class AccountListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_account_list);
+        setContentView(R.layout.fragment_account_list);
 
         RealmAccount currentAccount;
         if(getIntent().getStringExtra("email") != null)

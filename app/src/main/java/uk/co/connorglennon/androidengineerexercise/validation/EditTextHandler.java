@@ -1,5 +1,6 @@
 package uk.co.connorglennon.androidengineerexercise.validation;
 
+import android.graphics.drawable.Drawable;
 import android.text.InputType;
 import android.widget.EditText;
 
@@ -18,25 +19,17 @@ public class EditTextHandler {
         return editText;
     }
 
-    public static EditText setInvalid(EditText editText, String message)
+    public static EditText setInvalid(EditText editText, String message, Drawable invalidDrawable)
     {
-        editText.setCompoundDrawablesWithIntrinsicBounds(null, null, MyApp.cross, null);
+        editText.setCompoundDrawablesWithIntrinsicBounds(null, null, invalidDrawable, null);
         editText.setError(message, null);
         return  editText;
     }
 
-    public static EditText setValid(EditText editText, String message)
+    public static EditText setValid(EditText editText, String message, Drawable validDrawable)
     {
         editText.setError(null);
-        editText.setCompoundDrawablesWithIntrinsicBounds(null, null, MyApp.tick, null);
-        return editText;
-    }
-
-    public static EditText addValidator(InputValidatorListener activity_context, EditText editText, String regex, String message)
-    {
-        RegexValidatorTextWatcher regexValidatorTextWatcher = new RegexValidatorTextWatcher(editText, regex, message);
-        regexValidatorTextWatcher.addListener(activity_context);
-        editText.addTextChangedListener(regexValidatorTextWatcher);
+        editText.setCompoundDrawablesWithIntrinsicBounds(null, null, validDrawable, null);
         return editText;
     }
 
