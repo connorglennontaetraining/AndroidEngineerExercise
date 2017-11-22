@@ -2,6 +2,7 @@ package uk.co.connorglennon.androidengineerexercise;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,7 +16,7 @@ import uk.co.connorglennon.androidengineerexercise.validation.EditTextHandler;
 import uk.co.connorglennon.androidengineerexercise.validation.FormActivity;
 import uk.co.connorglennon.androidengineerexercise.validation.ValidatableEditText;
 
-public class SignUpActivity extends FormActivity implements ValidationListener {
+public class SignUpActivity extends AppCompatActivity {
 
     private static Class dest = AccountDetailsActivity.class;
 
@@ -53,7 +54,6 @@ public class SignUpActivity extends FormActivity implements ValidationListener {
         btnRevealPassword2 = (ImageButton) findViewById(R.id.btnRevealPassword2);
         btnRevealPassword1.setTag(0);
         btnRevealPassword2.setTag(0);
-        checkValidation();
 
         /*
         TODO: Consider moving object creation to the addValidator method or another factory method.
@@ -79,17 +79,6 @@ public class SignUpActivity extends FormActivity implements ValidationListener {
         signUpAccount.setAccountDetails(new RealmAccountDetails());
     }
 
-    public boolean checkAccount()
-    {
-        if(RealmController.getInstance().isEmailUsed(signUpAccount.getEmail()))
-        {
-            ValidationListener listener = this;
-            listener.isInvalid(etEmail.editText, "Email already in use");
-            return false;
-        }
-        return true;
-    }
-
     public void saveAccount()
     {
         RealmController.getInstance().saveAccount(signUpAccount);
@@ -101,7 +90,7 @@ public class SignUpActivity extends FormActivity implements ValidationListener {
         {
             case R.id.btnNext:
                 initAccount();
-                if(checkAccount())
+                if(true)
                 {
                     saveAccount();
                     Intent intent = new Intent(this, dest);
@@ -151,22 +140,5 @@ public class SignUpActivity extends FormActivity implements ValidationListener {
                 isValidPassword2 = flag;
                 break;
         }
-    }
-
-    @Override
-    protected void checkValidation()
-    {
-        if(isValidEmail && isValidPassword1 && isValidPassword2) {
-            if (etPassword1.editText.getText().toString().equals(etPassword2.editText.getText().toString())) {
-                ButtonHandler.enableButton(btnNext);
-                return;
-            }
-            else
-            {
-                EditTextHandler.setInvalid(etPassword2.editText, "Passwords do not match", MyApp.cross);
-                ButtonHandler.disableButton(btnNext);
-            }
-        }
-        ButtonHandler.disableButton(btnNext);
     }
 }

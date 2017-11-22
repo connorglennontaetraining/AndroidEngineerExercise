@@ -40,7 +40,6 @@ public class ValidatableEditText {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                Toast.makeText(MyApp.appContext, "Testing", Toast.LENGTH_SHORT).show();
                 input = editText.getText().toString();
                 if(validationMethod.isStringNUllOrEmpty(input)) {
                     resetValid(editText);
@@ -48,7 +47,7 @@ public class ValidatableEditText {
                 }
                 else {
                     if(validationMethod.validate(input)) {
-                        setValid(editText, null, validationMarkers.validMarker);
+                        setValid(editText, validationMarkers.validMarker);
                         isValid = true;
                     }
                     else {
@@ -64,6 +63,12 @@ public class ValidatableEditText {
         return isValid;
     }
 
+    /**
+     * Modifies the EditTexts look to remove indications of validity.
+     * Usefull when no input has been given yet.
+     * @param editText the EditText object to be modified.
+     * @return the modified EditText.
+     */
     public static EditText resetValid(EditText editText) {
         editText.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
         editText.setError(null);
@@ -90,7 +95,14 @@ public class ValidatableEditText {
         return  editText;
     }
 
-    public static EditText setValid(EditText editText, String message, Drawable validDrawable) {
+    /**
+     * Modifies the EditText's look to indicate there is an error.
+     * @param editText the EditText object to be modified.
+     * @param validDrawable a drawable that will be drawn on the right edge of
+     *                        the object. If null, no drawable is drawn.
+     * @return the modified EditText.
+     */
+    public static EditText setValid(EditText editText, Drawable validDrawable) {
         editText.setError(null);
         editText.setCompoundDrawablesWithIntrinsicBounds(null, null, validDrawable, null);
         return editText;
