@@ -17,6 +17,7 @@ public class ValidatableEditText {
     private String input, invalidMessage;
     private ValidationMethod validationMethod;
     private ValidationMarkers validationMarkers;
+    private boolean isValid;
 
     public ValidatableEditText(final EditText editText, final String invalidMessage, final ValidationMethod validationMethod, final ValidationMarkers validationMarkers) {
         this.editText = editText;
@@ -24,6 +25,7 @@ public class ValidatableEditText {
         this.invalidMessage = invalidMessage;
         this.validationMethod = validationMethod;
         this.validationMarkers = validationMarkers;
+        this.isValid = false;
 
         editText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -40,28 +42,61 @@ public class ValidatableEditText {
             public void afterTextChanged(Editable editable) {
                 Toast.makeText(MyApp.appContext, "Testing", Toast.LENGTH_SHORT).show();
                 input = editText.getText().toString();
-                if(validationMethod.isStringNUllOrEmpty(input))
-                {
-                    EditTextHandler.resetValid(editText);
+                if(validationMethod.isStringNUllOrEmpty(input)) {
+                    resetValid(editText);
+                    isValid = false;
                 }
-                else
-                {
-                    if(validationMethod.validate(input))
-                    {
-                        EditTextHandler.setValid(editText, null, validationMarkers.validMarker);
+                else {
+                    if(validationMethod.validate(input)) {
+                        setValid(editText, null, validationMarkers.validMarker);
+                        isValid = true;
                     }
                     else {
-                        EditTextHandler.setInvalid(editText, invalidMessage, validationMarkers.invalidMarker);
+                        setInvalid(editText, invalidMessage, validationMarkers.invalidMarker);
+                        isValid = false;
                     }
                 }
             }
         });
-
-
     }
 
-    public static class ValidationMarkers
-    {
+    public boolean isValid() {
+        return isValid;
+    }
+
+    public static EditText resetValid(EditText editText) {
+        editText.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+        editText.setError(null);
+        return editText;
+    }
+
+    /**
+     * Modifies the EditText's look to indicate there is an error.
+     * @param editText the EditText object to be modified.
+     * @param message the error message that will be displayed to the user.
+     * @param invalidDrawable a drawable that will be drawn on the right edge of
+     *                        the object. If null, this method calls the standard
+     *                        android setError(message).
+     * @return the modified EditText.
+     */
+    public static EditText setInvalid(EditText editText, String message, Drawable invalidDrawable) {
+        if(invalidDrawable != null) {
+            editText.setCompoundDrawablesWithIntrinsicBounds(null, null, invalidDrawable, null);
+            editText.setError(message, null);
+        }
+        else {
+            editText.setError(message);
+        }
+        return  editText;
+    }
+
+    public static EditText setValid(EditText editText, String message, Drawable validDrawable) {
+        editText.setError(null);
+        editText.setCompoundDrawablesWithIntrinsicBounds(null, null, validDrawable, null);
+        return editText;
+    }
+
+    public static class ValidationMarkers {
         private Drawable validMarker, invalidMarker;
 
         public ValidationMarkers(Drawable validMarker, Drawable invalidMarker) {
@@ -73,14 +108,12 @@ public class ValidatableEditText {
     public static abstract class ValidationMethod {
         public abstract boolean validate(String input);
 
-        public final boolean isStringNUllOrEmpty(String input)
-        {
+        public final boolean isStringNUllOrEmpty(String input) {
             return input.isEmpty() || input == null;
         }
     }
 
-    public static class RegexMethod extends ValidationMethod
-    {
+    public static class RegexMethod extends ValidationMethod {
         String regex;
 
         public RegexMethod(String regex) {
